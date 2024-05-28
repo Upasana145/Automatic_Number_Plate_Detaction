@@ -1,0 +1,1270 @@
+// import { toast } from "react-toastify";
+// import { postAPI } from "../utils/fetchapi";
+// import swal from "sweetalert";
+// import { Link } from "react-router-dom";
+
+// const DashboardContent = ({ users, fetchUsers }) => {
+//   const sureToDelete = (id) => {
+//     swal({
+//       title: "Are you sure?",
+//       text: "Are you sure that you want to delete the department info?",
+//       icon: "warning",
+//       dangerMode: true,
+//       buttons: ["No, cancel it!", "Yes, I am sure!"],
+//     }).then(async (willDelete) => {
+//       if (willDelete) {
+//         await deleteHandler(id);
+//       }
+//     });
+//   };
+
+//   const deleteHandler = async (id) => {
+//     let data = await postAPI("master/emp/delete", { NGS: parseInt(id) }, null);
+//     if (data?.status) {
+//       toast.success("Department has been deleted successfully.");
+//       fetchUsers();
+//     } else {
+//       toast.error("Department is not deleted! Something went wrong.");
+//     }
+//   };
+
+//   return (
+//     <>
+//       {users.map((curUser, i) => {
+//         const {
+//           NGS,
+//           name,
+//           birthday,
+//           anniversary,
+//           employee_email,
+//           senior_email,
+//           hr_email,
+//         } = curUser;
+//         return (
+//           <tr key={i}>
+//             <td>{NGS}</td>
+//             <td>{name}</td>
+//             <td>{birthday}</td>
+//             <td>{anniversary}</td>
+//             <td>
+//               {employee_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+//             <td>
+//               {senior_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+//             <td>
+//               {hr_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+
+//             <td className="edit">
+//               <Link to="/generate">Generate</Link>
+//             </td>
+//           </tr>
+//         );
+//       })}
+//     </>
+//   );
+// };
+
+// export default DashboardContent;
+
+// ********************************************
+// import { useState } from "react";
+// import { toast } from "react-toastify";
+// import { postAPI } from "../utils/fetchapi";
+// import swal from "sweetalert";
+// import { Link } from "react-router-dom";
+// import Modal from "react-modal"; // Import React Modal
+// import image1 from "../Images/Happy Birthday1.avif";
+// import image2 from "../Images/Happybirthday2.jpg";
+// import image3 from "../Images/Happy Birthday1.avif";
+// import image4 from "../Images/Happybirthday2.jpg";
+// import image5 from "../Images/Happy Birthday1.avif";
+// import image6 from "../Images/Happybirthday2.jpg";
+
+// const DashboardContent = ({ users, fetchUsers }) => {
+//   const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+
+//   const sureToDelete = (id) => {
+//     swal({
+//       title: "Are you sure?",
+//       text: "Are you sure that you want to delete the department info?",
+//       icon: "warning",
+//       dangerMode: true,
+//       buttons: ["No, cancel it!", "Yes, I am sure!"],
+//     }).then(async (willDelete) => {
+//       if (willDelete) {
+//         await deleteHandler(id);
+//       }
+//     });
+//   };
+
+//   const deleteHandler = async (id) => {
+//     let data = await postAPI("master/emp/delete", { NGS: parseInt(id) }, null);
+//     if (data?.status) {
+//       toast.success("Department has been deleted successfully.");
+//       fetchUsers();
+//     } else {
+//       toast.error("Department is not deleted! Something went wrong.");
+//     }
+//   };
+
+//   const openModal = () => {
+//     setShowModal(true);
+//   };
+
+//   const closeModal = () => {
+//     setShowModal(false);
+//   };
+
+//   const cameraAndDept = [
+//     { camera: 1, dept_name: "Happy Birthday" },
+//     { camera: 2, dept_name: "Anniversory" },
+//     { camera: 3, dept_name: "Happy Birthday" },
+//     { camera: 1, dept_name: "Happy Birthday" },
+//     { camera: 5, dept_name: "Happy Birthday" },
+//     { camera: 4, dept_name: "Anniversory" },
+//   ];
+
+//   const [popupImage, setPopupImage] = useState(null);
+
+//   const openPopup = (imageSrc) => {
+//     setPopupImage(imageSrc);
+//   };
+
+//   const closePopup = () => {
+//     setPopupImage(null);
+//   };
+
+//   const imageArray = [image1, image2, image3, image4, image5, image6];
+
+//   return (
+//     <>
+//       {users.map((curUser, i) => {
+//         const {
+//           NGS,
+//           name,
+//           birthday,
+//           anniversary,
+//           employee_email,
+//           senior_email,
+//           hr_email,
+//         } = curUser;
+//         return (
+//           <tr key={i}>
+//             <td>{NGS}</td>
+//             <td>{name}</td>
+//             <td>{birthday}</td>
+//             <td>{anniversary}</td>
+//             <td>
+//               {employee_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+//             <td>
+//               {senior_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+//             <td>
+//               {hr_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+
+//             <td className="edit">
+//               <button onClick={openModal}>Generate</button>
+//             </td>
+//           </tr>
+//         );
+//       })}
+
+//       {/* Modal to display dummy images */}
+//       <Modal
+//         isOpen={showModal}
+//         onRequestClose={closeModal}
+//         contentLabel="Example Modal"
+//         style={{
+//           content: {
+//             top: "50%",
+//             left: "50%",
+//             right: "20%",
+//             bottom: "auto",
+//             marginRight: "-50%",
+//             transform: "translate(-50%, -50%)",
+//             padding: "40px",
+//           },
+//         }}
+//       >
+//         <div className="imageContainer">
+//           <div style={{ display: "flex", justifyContent: "space-between" }}>
+//             <button
+//               style={{
+//                 padding: "8px 16px",
+//                 borderRadius: "4px",
+//                 cursor: "pointer",
+//                 backgroundColor: "#dc3545", // Change color based on showImages state
+//                 color: "#fff", // Text color
+//                 border: "none", // Remove border
+//                 outline: "none", // Remove outline
+//               }}
+//             >
+//               Send
+//             </button>
+//             <button
+//               style={{
+//                 padding: "8px 16px",
+//                 borderRadius: "4px",
+//                 cursor: "pointer",
+//                 backgroundColor: "#dc3545", // Change color based on showImages state
+//                 color: "#fff", // Text color
+//                 border: "none", // Remove border
+//                 outline: "none", // Remove outline
+//               }}
+//               onClick={closeModal}
+//             >
+//               Close Modal
+//             </button>
+//           </div>
+
+//           <div className="parent" style={{ height: "400px" }}>
+//             {imageArray.map((image, index) => (
+//               <div className="imagecontainerchild" key={index}>
+//                 <div className="img_child">
+//                   <img src={image} alt="" onClick={() => openPopup(image)} />
+//                   <div className="img_dept">
+//                     {cameraAndDept[index]?.dept_name}
+//                   </div>
+//                   <div className="img_cam">
+//                     Cam: <span>{cameraAndDept[index]?.camera}</span>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//           {/* {popupImage && (
+//             <div className="popup">
+//               <span className="close" onClick={closePopup}>
+//                 &times;
+//               </span>
+//               <img src={popupImage} alt="" className="popup-image" />
+//             </div>
+//           )} */}
+//         </div>
+//       </Modal>
+//     </>
+//   );
+// };
+
+// export default DashboardContent;
+// *********************************************
+// some modifications***************************
+// import { useState } from "react";
+// import { toast } from "react-toastify";
+// import { postAPI } from "../utils/fetchapi";
+// import swal from "sweetalert";
+// import { Link } from "react-router-dom";
+// import Modal from "react-modal"; // Import React Modal
+// import image1 from "../Images/Happy Birthday1.avif";
+// import image2 from "../Images/Happybirthday2.jpg";
+// import image3 from "../Images/Happy Birthday1.avif";
+// import image4 from "../Images/Happybirthday2.jpg";
+// import image5 from "../Images/Happy Birthday1.avif";
+// import image6 from "../Images/Happybirthday2.jpg";
+
+// const DashboardContent = ({ users, fetchUsers }) => {
+//   const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+//   const [selectedImage, setSelectedImage] = useState(null); // State to manage selected image
+//   const [selectedNGS, setSelectedNGS] = useState(""); // State to manage selected NGS
+
+//   const sureToDelete = (id) => {
+//     swal({
+//       title: "Are you sure?",
+//       text: "Are you sure that you want to delete the department info?",
+//       icon: "warning",
+//       dangerMode: true,
+//       buttons: ["No, cancel it!", "Yes, I am sure!"],
+//     }).then(async (willDelete) => {
+//       if (willDelete) {
+//         await deleteHandler(id);
+//       }
+//     });
+//   };
+
+//   const deleteHandler = async (id) => {
+//     let data = await postAPI("master/emp/delete", { NGS: parseInt(id) }, null);
+//     if (data?.status) {
+//       toast.success("Department has been deleted successfully.");
+//       fetchUsers();
+//     } else {
+//       toast.error("Department is not deleted! Something went wrong.");
+//     }
+//   };
+
+//   const openModal = () => {
+//     setShowModal(true);
+//   };
+
+//   const closeModal = () => {
+//     setShowModal(false);
+//   };
+
+//   const cameraAndDept = [
+//     { camera: 1, dept_name: "Happy Birthday" },
+//     { camera: 2, dept_name: "Anniversary" },
+//     { camera: 3, dept_name: "Happy Birthday" },
+//     { camera: 1, dept_name: "Happy Birthday" },
+//     { camera: 5, dept_name: "Happy Birthday" },
+//     { camera: 4, dept_name: "Anniversary" },
+//   ];
+
+//   const openPopup = (imageSrc, ngs, index) => {
+//     setSelectedImage(imageSrc);
+//     setSelectedNGS(ngs);
+//     console.log("Selected Image Index:", index);
+//     console.log("Selected NGS:", ngs);
+//   };
+
+//   const closePopup = () => {
+//     setSelectedImage(null);
+//     setSelectedNGS("");
+//   };
+
+//   const imageArray = [image1, image2, image3, image4, image5, image6];
+
+//   return (
+//     <>
+//       {users.map((curUser, i) => {
+//         const {
+//           NGS,
+//           name,
+//           birthday,
+//           anniversary,
+//           employee_email,
+//           senior_email,
+//           hr_email,
+//         } = curUser;
+//         return (
+//           <tr key={i}>
+//             <td>{NGS}</td>
+//             <td>{name}</td>
+//             <td>{birthday}</td>
+//             <td>{anniversary}</td>
+//             <td>
+//               {employee_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+//             <td>
+//               {senior_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+//             <td>
+//               {hr_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+
+//             <td className="edit">
+//               <button onClick={openModal}>Generate</button>
+//             </td>
+//           </tr>
+//         );
+//       })}
+
+//       {/* Modal to display dummy images */}
+//       <Modal
+//         isOpen={showModal}
+//         onRequestClose={closeModal}
+//         contentLabel="Example Modal"
+//         style={{
+//           content: {
+//             top: "50%",
+//             left: "50%",
+//             right: "20%",
+//             bottom: "auto",
+//             marginRight: "-50%",
+//             transform: "translate(-50%, -50%)",
+//             padding: "40px",
+//           },
+//         }}
+//       >
+//         <div className="imageContainer">
+//           <div style={{ display: "flex", justifyContent: "space-between" }}>
+//             <button
+//               style={{
+//                 padding: "8px 16px",
+//                 borderRadius: "4px",
+//                 cursor: "pointer",
+//                 backgroundColor: "#dc3545", // Change color based on showImages state
+//                 color: "#fff", // Text color
+//                 border: "none", // Remove border
+//                 outline: "none", // Remove outline
+//               }}
+//             >
+//               Send
+//             </button>
+//             <button
+//               style={{
+//                 padding: "8px 16px",
+//                 borderRadius: "4px",
+//                 cursor: "pointer",
+//                 backgroundColor: "#dc3545", // Change color based on showImages state
+//                 color: "#fff", // Text color
+//                 border: "none", // Remove border
+//                 outline: "none", // Remove outline
+//               }}
+//               onClick={closeModal}
+//             >
+//               Close Modal
+//             </button>
+//           </div>
+
+//           <div className="parent" style={{ height: "400px" }}>
+//             {imageArray.map((image, index) => (
+//               <div className="imagecontainerchild" key={index}>
+//                 <div className="img_child">
+//                   <img
+//                     src={image}
+//                     alt=""
+//                     onClick={() => openPopup(image, index)}
+//                   />
+//                   <div className="img_dept">
+//                     {cameraAndDept[index]?.dept_name}
+//                   </div>
+//                   <div className="img_cam">
+//                     Cam: <span>{cameraAndDept[index]?.camera}</span>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//           {selectedImage && (
+//             <div className="popup">
+//               <span className="close" onClick={closePopup}>
+//                 &times;
+//               </span>
+//               <img src={selectedImage} alt="" className="popup-image" />
+//               <div>NGS: {selectedNGS}</div>
+//             </div>
+//           )}
+//         </div>
+//       </Modal>
+//     </>
+//   );
+// };
+
+// export default DashboardContent;
+
+// import { useState } from "react";
+// import { toast } from "react-toastify";
+// import { postAPI } from "../utils/fetchapi";
+// import swal from "sweetalert";
+// import { Link } from "react-router-dom";
+// import Modal from "react-modal"; // Import React Modal
+// import image1 from "../Images/Happy Birthday1.avif";
+// import image2 from "../Images/Happybirthday2.jpg";
+// import image3 from "../Images/Happy Birthday1.avif";
+// import image4 from "../Images/Happybirthday2.jpg";
+// import image5 from "../Images/Happy Birthday1.avif";
+// import image6 from "../Images/Happybirthday2.jpg";
+// import { FaTimes } from "react-icons/fa";
+
+// const DashboardContent = ({ users, fetchUsers }) => {
+//   const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+//   const [selectedImage, setSelectedImage] = useState(null); // State to manage selected image
+//   const [selectedNGS, setSelectedNGS] = useState(""); // State to manage selected NGS
+//   const [selectedname, setSelectedname] = useState(""); // State to manage selected name
+//   const [selectedEventType, setSelectedEventType] = useState(""); // State to manage selected event type (birthday/anniversary)
+//   const [selectedImageindex, setSelectedImageindex] = useState(""); // State to manage selected event type (birthday/anniversary)
+
+//   const [Selecteddate, setSelecteddate] = useState("");
+//   const sureToDelete = (id) => {
+//     swal({
+//       title: "Are you sure?",
+//       text: "Are you sure that you want to delete the department info?",
+//       icon: "warning",
+//       dangerMode: true,
+//       buttons: ["No, cancel it!", "Yes, I am sure!"],
+//     }).then(async (willDelete) => {
+//       if (willDelete) {
+//         await deleteHandler(id);
+//       }
+//     });
+//   };
+
+//   const deleteHandler = async (id) => {
+//     let data = await postAPI("master/emp/delete", { NGS: parseInt(id) }, null);
+//     if (data?.status) {
+//       toast.success("Department has been deleted successfully.");
+//       fetchUsers();
+//     } else {
+//       toast.error("Department is not deleted! Something went wrong.");
+//     }
+//   };
+
+//   // const openModal = (ngs, name) => {
+//   //   setShowModal(true);
+//   //   setSelectedNGS(ngs);
+//   //   setSelectedname(name);
+
+//   //   console.log("hey i am ngs", ngs);
+//   // };
+//   const openModal = (ngs, name, eventType, eventdate) => {
+//     setShowModal(true);
+//     setSelectedNGS(ngs);
+//     setSelectedname(name);
+
+//     setSelecteddate(eventdate);
+
+//     setSelectedEventType(eventType);
+//   };
+
+//   const closeModal = () => {
+//     setShowModal(false);
+//   };
+
+//   const cameraAndDept = [
+//     { camera: 1, dept_name: "Happy Birthday" },
+//     { camera: 2, dept_name: "Anniversary" },
+//     { camera: 3, dept_name: "Happy Birthday" },
+//     { camera: 1, dept_name: "Happy Birthday" },
+//     { camera: 5, dept_name: "Happy Birthday" },
+//     { camera: 4, dept_name: "Anniversary" },
+//   ];
+
+//   const openPopup = (
+//     imageSrc,
+//     ngs,
+//     name,
+//     selectedEventType,
+//     Selecteddate,
+//     index
+//   ) => {
+//     setSelectedImage(imageSrc);
+//     console.log("hey i am imageSrc", imageSrc);
+//     // console.log("hey i am selectedImage", selectedImage);
+
+//     setSelectedNGS(ngs);
+//     setSelectedImageindex(index);
+//     console.log("Selected Image Index:", index);
+//     console.log("Selected NGS:", ngs);
+//     console.log("Selected Name:", name);
+//     console.log("Selected selectedEventType:", selectedEventType);
+//     console.log("Selected Selecteddate:", Selecteddate);
+//   };
+
+//   const closePopup = () => {
+//     setSelectedImage(null);
+//     // setSelectedNGS("");
+//   };
+
+//   const imageArray = [image1, image2, image3, image4, image5, image6];
+//   const today = new Date();
+//   const todayMonth = today.getMonth() + 1; // Months are zero-based
+//   const todayDay = today.getDate();
+
+//   const sendEmail = async () => {
+//     try {
+//       console.log("hey i am payload", selectedNGS);
+//       const payload = {
+//         NGS: selectedNGS,
+//         image: selectedImage,
+//         name: selectedname,
+//         selectedEventType: selectedEventType,
+//       };
+//       const response = await postAPI("master/mailsend", payload);
+//       console.log("hey i am response. status: " + response.status);
+//       if (response?.status) {
+//         toast.success("Email sent successfully.");
+//       } else {
+//         // toast.error("Failed to send email.");
+//         throw new Error("Failed to send email.");
+//       }
+//     } catch (error) {
+//       console.error("Error sending email:", error);
+//       toast.error("An error occurred while sending email.");
+//     }
+//   };
+
+//   return (
+//     <>
+//       {users.map((curUser, i) => {
+//         const {
+//           NGS,
+//           name,
+//           birthday,
+//           anniversary,
+//           employee_email,
+//           senior_email,
+//           hr_email,
+//         } = curUser;
+
+//         const birthdayDate = new Date(birthday);
+//         const birthdayMonth = birthdayDate.getMonth() + 1;
+//         const birthdayDay = birthdayDate.getDate();
+
+//         const anniversaryDate = new Date(anniversary);
+//         const anniversaryMonth = anniversaryDate.getMonth() + 1;
+//         const anniversaryDay = anniversaryDate.getDate();
+
+//         // Check if birthday or anniversary matches today's day and month
+//         const isBirthdayToday =
+//           birthdayMonth === todayMonth && birthdayDay === todayDay;
+//         const isAnniversaryToday =
+//           anniversaryMonth === todayMonth && anniversaryDay === todayDay;
+
+//         return (
+//           <tr key={i}>
+//             <td>{NGS}</td>
+//             <td>{name}</td>
+//             <td>{birthday}</td>
+//             <td>{anniversary}</td>
+//             <td>
+//               {employee_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+//             <td>
+//               {senior_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+//             <td>
+//               {hr_email.split(",").map((email, index) => (
+//                 <div key={index}>{email.trim()}</div>
+//               ))}
+//             </td>
+
+//             {/* <td className="edit">
+//               <button onClick={() => openModal(NGS, name)}>Generate</button>
+//             </td> */}
+//             {/* <td className="edit">
+//               {(isBirthdayToday || isAnniversaryToday) && (
+//                 <button onClick={() => openModal(NGS, name)}>Generate</button>
+//               )}
+//             </td> */}
+
+//             <td className="edit">
+//               {isBirthdayToday && !isAnniversaryToday && (
+//                 <button
+//                   onClick={() => openModal(NGS, name, "birthday", birthday)}
+//                   style={{
+//                     backgroundColor: "#ffa500", // Fallback color if gradient isn't supported
+//                     backgroundImage:
+//                       "linear-gradient(to bottom, #c55b0a, #ecd106)",
+//                     color: "white",
+//                     padding: "8px",
+//                     borderRadius: "5px",
+//                     border: "none",
+//                     cursor: "pointer",
+//                   }}
+//                 >
+//                   Generate
+//                 </button>
+//               )}
+//               {isAnniversaryToday && !isBirthdayToday && (
+//                 <button
+//                   onClick={() =>
+//                     openModal(NGS, name, "anniversary", anniversary)
+//                   }
+//                   style={{
+//                     backgroundColor: "#ffa500", // Fallback color if gradient isn't supported
+//                     backgroundImage:
+//                       "linear-gradient(to bottom, #c55b0a, #ecd106)",
+//                     color: "white",
+//                     padding: "8px",
+//                     borderRadius: "5px",
+//                     border: "none",
+//                     cursor: "pointer",
+//                   }}
+//                 >
+//                   Generate
+//                 </button>
+//               )}
+//               {isBirthdayToday && isAnniversaryToday && (
+//                 <button
+//                   onClick={() =>
+//                     openModal(NGS, name, "birthday && anniversary", birthday)
+//                   }
+//                   style={{
+//                     backgroundColor: "#ffa500", // Fallback color if gradient isn't supported
+//                     backgroundImage:
+//                       "linear-gradient(to bottom, #c55b0a, #ecd106)",
+//                     color: "white",
+//                     padding: "8px",
+//                     borderRadius: "5px",
+//                     border: "none",
+//                     cursor: "pointer",
+//                   }}
+//                 >
+//                   Generate
+//                 </button>
+//               )}
+//             </td>
+//           </tr>
+//         );
+//       })}
+
+//       {/* Modal to display dummy images */}
+//       <Modal
+//         isOpen={showModal}
+//         onRequestClose={closeModal}
+//         contentLabel="Example Modal"
+//         style={{
+//           content: {
+//             top: "50%",
+//             left: "50%",
+//             right: "20%",
+//             bottom: "auto",
+//             marginRight: "-50%",
+//             transform: "translate(-50%, -50%)",
+//             padding: "40px",
+//           },
+//         }}
+//       >
+//         <div className="imageContainer">
+//           <div style={{ display: "flex", justifyContent: "space-between" }}>
+//             <button
+//               style={{
+//                 padding: "8px 16px",
+//                 borderRadius: "4px",
+//                 cursor: "pointer",
+//                 // backgroundColor: "#dc3545", // Change color based on showImages state
+//                 backgroundColor: "#ffa500", // Fallback color if gradient isn't supported
+//                 backgroundImage: "linear-gradient(to bottom, #c55b0a, #ecd106)",
+
+//                 color: "#fff", // Text color
+//                 border: "none", // Remove border
+//                 outline: "none", // Remove outline
+//               }}
+//               onClick={sendEmail}
+//             >
+//               Send
+//             </button>
+//             <button
+//               style={{
+//                 padding: "0px 12px",
+//                 borderRadius: "4px",
+//                 cursor: "pointer",
+//                 // backgroundColor: "#dc3545", // Change color based on showImages state
+//                 backgroundColor: "#ffa500", // Fallback color if gradient isn't supported
+//                 backgroundImage: "linear-gradient(to bottom, #c55b0a, #ecd106)",
+
+//                 color: "#fff", // Text color
+//                 border: "none", // Remove border
+//                 outline: "none", // Remove outline
+//               }}
+//               onClick={closeModal}
+//             >
+//               <FaTimes />
+//             </button>
+//           </div>
+//           <div>NGS: {selectedNGS}</div>
+//           <div>Name: {selectedname}</div>
+//           <div>Selected Image: {selectedImageindex}</div>
+
+//           {/* <div>Date: {Selecteddate}</div> */}
+
+//           {/* <div>
+//             {selectedEventType === "birthday" ? "Birthday" : "Anniversary"}:{" "}
+//             {Selecteddate}
+//           </div> */}
+//           <div>
+//             {/* {selectedEventType === "birthday" ? "Birthday" : "Anniversary"}{" "} */}
+//             {selectedEventType === "birthday"
+//               ? "Birthday"
+//               : selectedEventType === "anniversary"
+//               ? "Anniversary"
+//               : "Birthday and Anniversary both on the same day"}
+//             ; Date:{Selecteddate}
+//             {/* {selectedEventType === "birthday" ? { birthday } : { anniversary }} */}
+//           </div>
+
+//           <div className="parent" style={{ height: "400px" }}>
+//             {imageArray.map((image, index) => (
+//               <div className="imagecontainerchild" key={index}>
+//                 <div className="img_child">
+//                   <img
+//                     src={image}
+//                     alt=""
+//                     onClick={() =>
+//                       openPopup(
+//                         image,
+//                         selectedNGS,
+//                         selectedname,
+//                         selectedEventType,
+//                         Selecteddate,
+//                         index
+//                       )
+//                     }
+//                   />
+//                   <div className="img_dept">
+//                     {cameraAndDept[index]?.dept_name}
+//                   </div>
+//                   {/* <div className="img_cam">
+//                     Cam: <span>{cameraAndDept[index]?.camera}</span>
+//                   </div> */}
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//           {/* {selectedImage && (
+//             <div className="popup">
+//               <span className="close" onClick={closePopup}>
+//                 &times;
+//               </span>
+//               <img src={selectedImage} alt="" className="popup-image" />
+//             </div>
+//           )} */}
+//         </div>
+//       </Modal>
+//     </>
+//   );
+// };
+
+// export default DashboardContent;
+// last updated code
+
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { postAPI } from "../utils/fetchapi";
+import swal from "sweetalert";
+import { Link } from "react-router-dom";
+import Modal from "react-modal"; // Import React Modal
+import image1 from "../Images/Happy Birthday1.avif";
+import image2 from "../Images/Happybirthday2.jpg";
+import image3 from "../Images/Happy Birthday1.avif";
+import image4 from "../Images/Happybirthday2.jpg";
+import image5 from "../Images/Happy Birthday1.avif";
+import image6 from "../Images/Happybirthday2.jpg";
+import { FaTimes } from "react-icons/fa";
+
+const DashboardContent = ({ users, fetchUsers }) => {
+  const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+  const [selectedImage, setSelectedImage] = useState(null); // State to manage selected image
+  const [selectedNGS, setSelectedNGS] = useState(""); // State to manage selected NGS
+  const [selectedname, setSelectedname] = useState(""); // State to manage selected name
+  const [selectedEventType, setSelectedEventType] = useState(""); // State to manage selected event type (birthday/anniversary)
+  const [selectedImageindex, setSelectedImageindex] = useState(""); // State to manage selected event type (birthday/anniversary)
+  const [croppedImage, setCroppedImage] = useState(""); // State to manage selected event type (cropped
+  // const [Selecteddate, setSelecteddate] = useState("");
+  const [Selectedpath, setSelectedpath] = useState("");
+
+  const sureToDelete = (id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Are you sure that you want to delete the department info?",
+      icon: "warning",
+      dangerMode: true,
+      buttons: ["No, cancel it!", "Yes, I am sure!"],
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        await deleteHandler(id);
+      }
+    });
+  };
+
+  const deleteHandler = async (id) => {
+    let data = await postAPI("master/emp/delete", { NGS: parseInt(id) }, null);
+    if (data?.status) {
+      toast.success("Department has been deleted successfully.");
+      fetchUsers();
+    } else {
+      toast.error("Department is not deleted! Something went wrong.");
+    }
+  };
+
+  // const openModal = (ngs, name) => {
+  //   setShowModal(true);
+  //   setSelectedNGS(ngs);
+  //   setSelectedname(name);
+
+  //   console.log("hey i am ngs", ngs);
+  // };
+  const openModal = async (id, raw_data_name, raw_data_path) => {
+    setShowModal(true);
+    // setSelectedNGS(ngs);
+    setSelectedNGS(id);
+
+    // setSelectedname(name);
+    setSelectedname(raw_data_name);
+
+    // setSelecteddate(eventdate);
+    setSelectedpath(raw_data_path);
+    console.log(
+      "hey i am raw..........",
+
+      `http://localhost:4002/uploads/${selectedname}`
+    );
+
+    // setSelectedEventType(eventType);
+    try {
+      console.log("hey i am payload", selectedNGS);
+      const payload = {
+        // NGS: selectedNGS,
+        // image: selectedImage,
+        // name: selectedname,
+        // selectedEventType: selectedEventType,
+        id: selectedNGS,
+      };
+      // const response = await postAPI("master/mailsend", payload);
+      const response = await postAPI("master/allimg_plate_no", payload);
+
+      console.log("hey i am response. status: ", response.data[3].croped_image);
+      setCroppedImage(response);
+      console.log(
+        "hey i am croped_image................",
+
+        `http://localhost:4002/uploads/${response.data[3].croped_image}`
+      );
+      // console.log(
+      //   "hey i am response data croped_image....: ",
+      //   response.data[]
+      // );
+
+      // console.log(
+      //   "hey i am images..",
+      //   `http://localhost/4002/response.data[0]`
+      // );
+
+      if (response?.status) {
+        toast.success("Email sent successfully.");
+      } else {
+        // toast.error("Failed to send email.");
+        throw new Error("Failed to send email.");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("An error occurred while sending email.");
+    }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const cameraAndDept = [
+    { camera: 1, dept_name: "Happy Birthday" },
+    { camera: 2, dept_name: "Anniversary" },
+    { camera: 3, dept_name: "Happy Birthday" },
+    { camera: 1, dept_name: "Happy Birthday" },
+    { camera: 5, dept_name: "Happy Birthday" },
+    { camera: 4, dept_name: "Anniversary" },
+  ];
+
+  const openPopup = (
+    croppedImage,
+    imageSrc,
+    ngs,
+    name,
+    selectedEventType,
+    Selecteddate,
+    index
+  ) => {
+    setSelectedImage(imageSrc);
+    console.log("hey i am imageSrc", imageSrc);
+    console.log(
+      "helo i am  croppedImage*************",
+      croppedImage.data[index]
+    );
+    // console.log("hey i am selectedImage", selectedImage);
+
+    setSelectedNGS(ngs);
+    setSelectedImageindex(index);
+    console.log("Selected Image Index:", index);
+    console.log("Selected NGS:", ngs);
+    console.log("Selected Name:", name);
+    console.log("Selected selectedEventType:", selectedEventType);
+    console.log("Selected Selecteddate:", Selecteddate);
+  };
+
+  const closePopup = () => {
+    setSelectedImage(null);
+    // setSelectedNGS("");
+  };
+
+  const imageArray = [image1, image2, image3, image4, image5, image6];
+  const allcroppedImage = croppedImage.data;
+  console.log("hey i am allcroppedImage....", croppedImage);
+  const today = new Date();
+  const todayMonth = today.getMonth() + 1; // Months are zero-based
+  const todayDay = today.getDate();
+
+  const sendEmail = async () => {
+    try {
+      console.log("hey i am payload", selectedNGS);
+      const payload = {
+        NGS: selectedNGS,
+        image: selectedImage,
+        name: selectedname,
+        selectedEventType: selectedEventType,
+      };
+      const response = await postAPI("master/mailsend", payload);
+      console.log("hey i am response. status: " + response.status);
+      if (response?.status) {
+        toast.success("Email sent successfully.");
+      } else {
+        // toast.error("Failed to send email.");
+        throw new Error("Failed to send email.");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("An error occurred while sending email.");
+    }
+  };
+
+  return (
+    <>
+      {users.map((curUser, i) => {
+        // const {
+        //   NGS,
+        //   name,
+        //   birthday,
+        //   anniversary,
+        //   employee_email,
+        //   senior_email,
+        //   hr_email,
+        // } = curUser;
+        const { id, raw_data_name, raw_data_path } = curUser;
+
+        // const birthdayDate = new Date(birthday);
+        // const birthdayMonth = birthdayDate.getMonth() + 1;
+        // const birthdayDay = birthdayDate.getDate();
+
+        // const anniversaryDate = new Date(anniversary);
+        // const anniversaryMonth = anniversaryDate.getMonth() + 1;
+        // const anniversaryDay = anniversaryDate.getDate();
+
+        // Check if birthday or anniversary matches today's day and month
+        // const isBirthdayToday =
+        //   birthdayMonth === todayMonth && birthdayDay === todayDay;
+        // const isAnniversaryToday =
+        //   anniversaryMonth === todayMonth && anniversaryDay === todayDay;
+
+        return (
+          <tr key={i}>
+            <td>{id}</td>
+            <td>{raw_data_name}</td>
+            <td>
+              {/* {raw_data_path} */}
+              {Selectedpath && (
+                <img
+                  // src={`${process.env.REACT_APP_API_URI}/${Selectedpath}`} wrong path
+                  src={`http://localhost:4002/uploads/${selectedname}`}
+                  alt={selectedname}
+                  style={{ maxWidth: "100%" }}
+                />
+              )}
+            </td>
+            {/* <td>{anniversary}</td> */}
+            {/* <td>
+              {employee_email.split(",").map((email, index) => (
+                <div key={index}>{email.trim()}</div>
+              ))}
+            </td> */}
+            {/* <td>
+              {senior_email.split(",").map((email, index) => (
+                <div key={index}>{email.trim()}</div>
+              ))}
+            </td> */}
+            {/* <td>
+              {hr_email.split(",").map((email, index) => (
+                <div key={index}>{email.trim()}</div>
+              ))}
+            </td> */}
+
+            {/* <td className="edit">
+              <button onClick={() => openModal(NGS, name)}>Generate</button>
+            </td> */}
+            {/* <td className="edit">
+              {(isBirthdayToday || isAnniversaryToday) && (
+                <button onClick={() => openModal(NGS, name)}>Generate</button>
+              )}
+            </td> */}
+
+            <td className="edit">
+              {/* {isBirthdayToday && !isAnniversaryToday && (
+              
+              )} */}
+              <button
+                onClick={() => openModal(id, raw_data_name, raw_data_path)}
+                style={{
+                  backgroundColor: "#ffa500", // Fallback color if gradient isn't supported
+                  backgroundImage:
+                    "linear-gradient(to bottom, #c55b0a, #ecd106)",
+                  color: "white",
+                  padding: "8px",
+                  borderRadius: "5px",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Generate
+              </button>
+
+              {/* {isAnniversaryToday && !isBirthdayToday && (
+                <button
+                  onClick={() =>
+                    openModal(NGS, name, "anniversary", anniversary)
+                  }
+                  style={{
+                    backgroundColor: "#ffa500", // Fallback color if gradient isn't supported
+                    backgroundImage:
+                      "linear-gradient(to bottom, #c55b0a, #ecd106)",
+                    color: "white",
+                    padding: "8px",
+                    borderRadius: "5px",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  Generate
+                </button>
+              )}
+              {isBirthdayToday && isAnniversaryToday && (
+                <button
+                  onClick={() =>
+                    openModal(NGS, name, "birthday && anniversary", birthday)
+                  }
+                  style={{
+                    backgroundColor: "#ffa500", // Fallback color if gradient isn't supported
+                    backgroundImage:
+                      "linear-gradient(to bottom, #c55b0a, #ecd106)",
+                    color: "white",
+                    padding: "8px",
+                    borderRadius: "5px",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  Generate
+                </button>
+              )} */}
+            </td>
+          </tr>
+        );
+      })}
+
+      {/* Modal to display dummy images */}
+      <Modal
+        isOpen={showModal}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+        style={{
+          content: {
+            top: "50%",
+            left: "50%",
+            right: "20%",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            padding: "40px",
+          },
+        }}
+      >
+        <div className="imageContainer">
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <button
+              style={{
+                padding: "8px 16px",
+                borderRadius: "4px",
+                cursor: "pointer",
+                // backgroundColor: "#dc3545", // Change color based on showImages state
+                backgroundColor: "#ffa500", // Fallback color if gradient isn't supported
+                backgroundImage: "linear-gradient(to bottom, #c55b0a, #ecd106)",
+
+                color: "#fff", // Text color
+                border: "none", // Remove border
+                outline: "none", // Remove outline
+              }}
+              onClick={sendEmail}
+            >
+              Send
+            </button>
+            <button
+              style={{
+                padding: "0px 12px",
+                borderRadius: "4px",
+                cursor: "pointer",
+                // backgroundColor: "#dc3545", // Change color based on showImages state
+                backgroundColor: "#ffa500", // Fallback color if gradient isn't supported
+                backgroundImage: "linear-gradient(to bottom, #c55b0a, #ecd106)",
+
+                color: "#fff", // Text color
+                border: "none", // Remove border
+                outline: "none", // Remove outline
+              }}
+              onClick={closeModal}
+            >
+              <FaTimes />
+            </button>
+          </div>
+          <div>id: {selectedNGS}</div>
+          <div>raw_data_name: {selectedname}</div>
+          <div>Selected_image_index: {selectedImageindex}</div>
+          <div>{imageArray}</div>
+          {/* <div>{allcroppedImage}</div> */}
+          <div
+            className="parent"
+            style={{ height: "400px", overflowY: "auto" }}
+          >
+            {allcroppedImage &&
+              allcroppedImage.map((imageData, index) => (
+                <div
+                  key={index}
+                  style={{
+                    marginBottom: "10px",
+                    border: "1px solid #ccc",
+                    padding: "10px",
+                  }}
+                >
+                  <h3>Image {index + 1}</h3>
+                  <p>URL: {imageData.url}</p>
+                  {/* Render other data fields here */}
+                </div>
+              ))}
+          </div>
+          <div className="parent" style={{ height: "400px" }}>
+            {imageArray.map((image, index) => (
+              <div className="imagecontainerchild" key={index}>
+                <div className="img_child">
+                  <img
+                    src={image}
+                    alt=""
+                    onClick={() =>
+                      openPopup(
+                        croppedImage,
+                        image,
+                        selectedNGS,
+                        selectedname,
+                        selectedEventType,
+
+                        Selectedpath,
+                        index
+                      )
+                    }
+                  />
+                  <div className="img_dept">
+                    {cameraAndDept[index]?.dept_name}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* allcroppedImage */}
+        </div>
+      </Modal>
+    </>
+  );
+};
+
+export default DashboardContent;
