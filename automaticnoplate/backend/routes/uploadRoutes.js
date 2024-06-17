@@ -15,7 +15,7 @@ router.post("/", upload.single("excel"), exceluploadFile);
 router.post("/sendimgtext", upload.single("image"), sendimgtext);
 // licence api all info
 router.get("/license", license);
-// licence image api
+// licence image api /all captured images
 router.post("/images", upload.single("image"), uploadFile);
 
 // router.post("/image", upload.single("text"), uploadFile);

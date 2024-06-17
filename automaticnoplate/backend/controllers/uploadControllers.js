@@ -6,6 +6,12 @@ const { resSend } = require("../utils/resSend");
 const xlsx = require("xlsx");
 const { mailControllerindividual } = require("./mailControllers.js");
 
+
+
+
+
+
+
 exports.uploadFile = async (req, res) => {
   // Handle Image Upload
   let fileData = {};
